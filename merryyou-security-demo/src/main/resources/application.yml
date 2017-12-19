@@ -1,0 +1,18 @@
+#数据库
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/merryyou-demo?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+  session:
+    store-type: none
+
+#端口
+server:
+  port: 8060
+
+#security
+security:
+  basic:
+    enabled: false
