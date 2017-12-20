@@ -41,6 +41,7 @@ public class UserController {
     @GetMapping(value = "/{id:\\d+}")
     @JsonView(User.UserDetailView.class)
     public User get(@PathVariable("id") Integer id) {
+//        throw new UserNotExistException(id);
         log.info("id={}", id);
         User user = new User();
         user.setUsername("admin");

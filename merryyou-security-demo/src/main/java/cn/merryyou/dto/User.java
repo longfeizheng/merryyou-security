@@ -1,7 +1,5 @@
 package cn.merryyou.dto;
 
-import cn.merryyou.validator.MyConstraint;
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -19,15 +17,11 @@ public class User {
 
     private Integer id;
 
-    @JsonView(UserSimpleView.class)
-    @MyConstraint(message = "测试")
     private String username;
 
-    @JsonView(UserDetailView.class)
     @NotBlank
     private String password;
 
-    @JsonView(UserSimpleView.class)
     private Date birthday;
 
     public interface UserSimpleView{};
