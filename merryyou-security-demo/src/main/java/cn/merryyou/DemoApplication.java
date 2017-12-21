@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
+ * SecurityContextHolder  SecurityContextPersistenceFilter
  * Created on 2017/12/18 0018.
  *
  * @author zlf

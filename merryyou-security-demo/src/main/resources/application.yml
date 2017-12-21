@@ -15,4 +15,11 @@ server:
 #security
 security:
   basic:
-    enabled: false
+    enabled: true
+
+#自定义登录页面
+merryyou:
+  security:
+    browser:
+#      loginPage: /demo-signIn.html
+      loginType: REDIRECT
