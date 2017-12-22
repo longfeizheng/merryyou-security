@@ -1,5 +1,6 @@
 package cn.merryyou.security.browser.authentication;
 
+import cn.merryyou.security.browser.support.SimpleResponse;
 import cn.merryyou.security.core.properties.LoginType;
 import cn.merryyou.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,7 +41,7 @@ public class MerryyouAuthenticationfailureHandler extends SimpleUrlAuthenticatio
         if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(e));
+            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
         } else {
             super.onAuthenticationFailure(request, response, e);
         }
