@@ -1,4 +1,4 @@
-package cn.merryyou.security.browser.authentication;
+package cn.merryyou.security.authentication.app.authnentication;
 
 import cn.merryyou.security.core.support.SimpleResponse;
 import cn.merryyou.security.core.properties.LoginType;

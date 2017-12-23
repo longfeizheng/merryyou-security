@@ -1,4 +1,4 @@
-package cn.merryyou.security.browser.support;
+package cn.merryyou.security.core.support;
 
 import lombok.Data;
 

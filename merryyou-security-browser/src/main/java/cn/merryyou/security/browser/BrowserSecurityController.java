@@ -1,6 +1,6 @@
 package cn.merryyou.security.browser;
 
-import cn.merryyou.security.browser.support.SimpleResponse;
+import cn.merryyou.security.core.support.SimpleResponse;
 import cn.merryyou.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
