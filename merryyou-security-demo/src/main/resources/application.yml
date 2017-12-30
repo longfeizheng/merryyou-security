@@ -18,11 +18,11 @@ security:
     enabled: true
 
 #自定义登录页面
-merryyou:
-  security:
-    browser:
+#merryyou:
+#  security:
+#    browser:
 #      loginPage: /demo-signIn.html #自定义登陆界面
-      loginType: REDIRECT
+#      loginType: REDIRECT
 #    code:
 #      image:
 #        length: 6  #验证码长度

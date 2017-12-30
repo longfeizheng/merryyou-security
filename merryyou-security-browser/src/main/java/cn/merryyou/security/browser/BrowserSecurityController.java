@@ -1,5 +1,6 @@
 package cn.merryyou.security.browser;
 
+import cn.merryyou.security.core.properties.SecurityConstants;
 import cn.merryyou.security.core.support.SimpleResponse;
 import cn.merryyou.security.core.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +45,7 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping("/authentication/require")
+    @RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)//返回状态吗401未授权
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);

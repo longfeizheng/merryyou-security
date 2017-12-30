@@ -37,7 +37,7 @@ public class MerryyouAuthenticationfailureHandler extends SimpleUrlAuthenticatio
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException e) throws IOException, ServletException {
-        log.info("【MerryyouAuthenticationSuccessHandler】 onAuthenticationFailure e={}", e);
+        log.info("【MerryyouAuthenticationfailureHandler】 onAuthenticationFailure e={}");
 
         if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());//服务器内部异常
