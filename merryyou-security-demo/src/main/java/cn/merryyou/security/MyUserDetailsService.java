@@ -1,13 +1,15 @@
-package cn.merryyou.security.browser;
+package cn.merryyou.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,8 +37,20 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("【MyUserDetailsService】 loadUserByUsername  username={}", username);
+        log.info("【MyUserDetailsService】 loadUserByUsername 表单登录用户名  username={}", username);
 
-        return new User(username, passwordEncoder.encode("123456"), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return buildUser(username);
+    }
+
+    @Override
+    public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
+        log.info("【MyUserDetailsService】 loadUserByUserId 社交登录用户ID  userId={}", userId);
+
+        return buildUser(userId);
+
+    }
+
+    private SocialUserDetails buildUser(String userId) {
+        return new SocialUser(userId, passwordEncoder.encode("123456"), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

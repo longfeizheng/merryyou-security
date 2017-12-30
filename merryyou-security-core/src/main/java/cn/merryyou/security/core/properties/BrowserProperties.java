@@ -14,6 +14,8 @@ public class BrowserProperties {
 
     private String loginPage = "/merryyou-signIn.html";
 
+    private String signUpUrl = "/merryyou-signUp.html";
+
     private LoginType loginType = LoginType.JSON;
 
     private int rememberMeSeconds = 3600;
