@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0
  */
 @Configuration
-@EnableConfigurationProperties(SecurityProperties.class)
+@EnableConfigurationProperties(SecurityProperties.class)//使配置读取器生效
 public class SecurityCoreConfig {
 }

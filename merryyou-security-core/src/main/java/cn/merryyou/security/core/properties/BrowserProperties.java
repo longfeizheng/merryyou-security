@@ -12,7 +12,9 @@ import lombok.Data;
 @Data
 public class BrowserProperties {
 
-    private String loginPage = "/signIn.html";
+    private String loginPage = "/merryyou-signIn.html";
 
     private LoginType loginType = LoginType.JSON;
+
+    private int rememberMeSeconds = 3600;
 }

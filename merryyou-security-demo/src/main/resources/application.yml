@@ -21,5 +21,10 @@ security:
 merryyou:
   security:
     browser:
-#      loginPage: /demo-signIn.html
+#      loginPage: /demo-signIn.html #自定义登陆界面
       loginType: REDIRECT
+#    code:
+#      image:
+#        length: 6  #验证码长度
+#        width: 100  #验证码宽度
+#        url: /user,/user/* #验证码拦截的url

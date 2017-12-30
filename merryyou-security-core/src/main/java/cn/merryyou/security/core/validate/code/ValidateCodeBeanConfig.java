@@ -23,7 +23,7 @@ public class ValidateCodeBeanConfig {
 	private SecurityProperties securityProperties;
 	
 	@Bean
-	@ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
+	@ConditionalOnMissingBean(name = "imageValidateCodeGenerator")//如果定义了该bean则不执行下面代码
 	public ValidateCodeGenerator imageValidateCodeGenerator() {
 		ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
 		codeGenerator.setSecurityProperties(securityProperties);

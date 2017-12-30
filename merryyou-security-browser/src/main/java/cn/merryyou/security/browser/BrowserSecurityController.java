@@ -30,7 +30,7 @@ import java.io.IOException;
 @Slf4j
 public class BrowserSecurityController {
 
-    private RequestCache requestCache = new HttpSessionRequestCache();
+    private RequestCache requestCache = new HttpSessionRequestCache();//请求的缓存
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -45,7 +45,7 @@ public class BrowserSecurityController {
      * @return
      */
     @RequestMapping("/authentication/require")
-    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)//返回状态吗401未授权
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {

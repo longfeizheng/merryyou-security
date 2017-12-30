@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 1.0
  */
 @Data
-@ConfigurationProperties(prefix = "merryyou.security")
+@ConfigurationProperties(prefix = "merryyou.security")//配置读取器，会读取application.yml中以merryyou.security开头的配置
 public class SecurityProperties {
 
     /**

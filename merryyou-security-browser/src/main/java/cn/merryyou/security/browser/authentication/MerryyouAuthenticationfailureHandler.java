@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 自定义登录失败处理
  * Created on 2017/12/21 0021.
  *
  * @author zlf
@@ -39,7 +40,7 @@ public class MerryyouAuthenticationfailureHandler extends SimpleUrlAuthenticatio
         log.info("【MerryyouAuthenticationSuccessHandler】 onAuthenticationFailure e={}", e);
 
         if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
-            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());//服务器内部异常
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
         } else {
