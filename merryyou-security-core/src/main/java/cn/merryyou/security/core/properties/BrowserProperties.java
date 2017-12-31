@@ -16,6 +16,10 @@ public class BrowserProperties {
 
     private String signUpUrl = "/merryyou-signUp.html";
 
+    private String signOutUrl = "/merryyou-signOut.html";
+
+    private SessionProperties session = new SessionProperties();
+
     private LoginType loginType = LoginType.JSON;
 
     private int rememberMeSeconds = 3600;

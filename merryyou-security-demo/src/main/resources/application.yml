@@ -6,11 +6,17 @@ spring:
     username: root
     password: admin
   session:
-    store-type: none
+    store-type: REDIS
+  redis:
+    host: localhost
+    port: 6380
+
 
 #端口
 server:
   port: 8060
+  session:
+    timeout: 600 #session失效时间
 
 #security
 security:
@@ -22,6 +28,7 @@ merryyou:
   security:
     browser:
       signUpUrl: /demo-signUp.html
+      signOutUrl: /demo-logout.html
 #      loginPage: /demo-signIn.html #自定义登陆界面
 #      loginType: REDIRECT
 #    code:
@@ -29,12 +36,12 @@ merryyou:
 #        length: 6  #验证码长度
 #        width: 100  #验证码宽度
 #        url: /user,/user/* #验证码拦截的url
-    social:
-      qq:
-        app-id:
-        app-secret:
-        providerId: callback.do
-      weixin:
-        app-id:
-        app-secret:
-      filterProcessesUrl: /qqLogin
+#    social:
+#      qq:
+#        app-id:
+#        app-secret:
+#        providerId: callback.do
+#      weixin:
+#        app-id:
+#        app-secret:
+#      filterProcessesUrl: /qqLogin

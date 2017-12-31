@@ -3,6 +3,7 @@
  */
 package cn.merryyou.security.core.validate.code;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  * @author zhailiang
  *
  */
-public class ValidateCode {
+public class ValidateCode implements Serializable{
 	
 	private String code;
 	
