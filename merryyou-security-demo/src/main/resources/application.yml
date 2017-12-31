@@ -32,6 +32,9 @@ merryyou:
     social:
       qq:
         app-id:
-        app-secrit:
+        app-secret:
         providerId: callback.do
+      weixin:
+        app-id:
+        app-secret:
       filterProcessesUrl: /qqLogin
