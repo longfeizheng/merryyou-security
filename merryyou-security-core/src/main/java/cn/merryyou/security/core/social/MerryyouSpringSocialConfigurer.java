@@ -1,5 +1,6 @@
 package cn.merryyou.security.core.social;
 
+import lombok.Data;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
@@ -10,17 +11,24 @@ import org.springframework.social.security.SpringSocialConfigurer;
  * @email i@merryyou.cn
  * @since 1.0
  */
+@Data
 public class MerryyouSpringSocialConfigurer extends SpringSocialConfigurer {
 
     private String filterProcessesUrl;
 
-    public MerryyouSpringSocialConfigurer (String filterProcessesUrl){
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
+    public MerryyouSpringSocialConfigurer(String filterProcessesUrl) {
         this.filterProcessesUrl = filterProcessesUrl;
     }
 
     @Override
     protected <T> T postProcess(T object) {
-        SocialAuthenticationFilter filter = (SocialAuthenticationFilter)super.postProcess(object);
-        return super.postProcess(object);
+        SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
+        filter.setFilterProcessesUrl(filterProcessesUrl);
+        if (socialAuthenticationFilterPostProcessor != null) {
+            socialAuthenticationFilterPostProcessor.process(filter);
+        }
+        return (T) filter;
     }
 }

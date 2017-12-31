@@ -35,7 +35,6 @@ import java.io.IOException;
 //public class MerryyouAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 public class MerryyouAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    private String credentialsCharset = "UTF-8";
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -56,8 +55,8 @@ public class MerryyouAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
         String header = request.getHeader("Authorization");
 
-        if (header == null || !header.startsWith("Basic")) {
-            throw new UnapprovedClientAuthenticationException("请求头中午client信息");
+        if (header == null || !header.startsWith("Basic ")) {
+            throw new UnapprovedClientAuthenticationException("请求头中无client信息");
         }
         String[] tokens = this.extractAndDecodeHeader(header, request);
 
@@ -69,9 +68,9 @@ public class MerryyouAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
 
         if (clientDetails == null) {
-            throw new UnapprovedClientAuthenticationException("clientId 对象的配置信息不存在" + clientId);
-        } else if (StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
-            throw new UnapprovedClientAuthenticationException("clientSecret 不配批" + clientId);
+            throw new UnapprovedClientAuthenticationException("clientId 对应的配置信息不存在" + clientId);
+        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
+            throw new UnapprovedClientAuthenticationException("clientSecret 不匹配" + clientId);
         }
 
         TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
@@ -97,7 +96,7 @@ public class MerryyouAuthenticationSuccessHandler extends SavedRequestAwareAuthe
             throw new BadCredentialsException("Failed to decode basic authentication token");
         }
 
-        String token = new String(decoded, this.getCredentialsCharset(request));
+        String token = new String(decoded, "UTF-8");
         int delim = token.indexOf(":");
         if (delim == -1) {
             throw new BadCredentialsException("Invalid basic authentication token");
@@ -106,12 +105,4 @@ public class MerryyouAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         }
     }
 
-    public void setCredentialsCharset(String credentialsCharset) {
-        Assert.hasText(credentialsCharset, "credentialsCharset cannot be null or empty");
-        this.credentialsCharset = credentialsCharset;
-    }
-
-    protected String getCredentialsCharset(HttpServletRequest httpRequest) {
-        return this.credentialsCharset;
-    }
 }

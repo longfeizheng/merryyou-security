@@ -36,6 +36,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
+    @Autowired
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 
@@ -51,6 +54,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     public SpringSocialConfigurer merryyouSocialSecurityConfig() {
         MerryyouSpringSocialConfigurer configurer = new MerryyouSpringSocialConfigurer(securityProperties.getSocial().getFilterProcessesUrl());
         configurer.signupUrl(securityProperties.getBrowser().getSignUpUrl());
+        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         return configurer;
     }
 

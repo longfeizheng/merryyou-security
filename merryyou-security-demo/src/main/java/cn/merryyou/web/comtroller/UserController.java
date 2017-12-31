@@ -2,6 +2,7 @@ package cn.merryyou.web.comtroller;
 
 import cn.merryyou.dto.User;
 import cn.merryyou.dto.UserQueryCondition;
+import cn.merryyou.security.authentication.app.social.AppSignUpUtils;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,16 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private AppSignUpUtils appSignUpUtils;
+
     @PostMapping("/regist")
-    public void regist(User user, HttpServletRequest request){
+    public void regist(User user, HttpServletRequest request) {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识
         log.info("注册页面");
         String userId = user.getUsername();
-        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+//        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
 
     }
 
@@ -48,6 +53,7 @@ public class UserController {
     public Object getCurrentUser(Authentication authentication) {
         return authentication;
     }
+
     @GetMapping("/meuser")
     public Object getCurrentUser1(@AuthenticationPrincipal UserDetails user) {
         return user;

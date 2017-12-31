@@ -132,13 +132,4 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 //                .apply(smsCodeAuthenticationSecurityConfig);
     }
 
-    /**
-     * 相同密码每次加密出的密码不一样（随机生成salt）
-     *
-     * @return
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
