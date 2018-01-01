@@ -2,6 +2,7 @@ package cn.merryyou.security.core.authorize;
 
 import cn.merryyou.security.core.properties.SecurityConstants;
 import cn.merryyou.security.core.properties.SecurityProperties;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,8 +24,8 @@ public class MerryyouAuthorizeConfigProvider implements AuthorizeConfigProvider 
     private SecurityProperties securityProperties;
 
     @Override
-    public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry configurer) {
-        configurer.antMatchers(
+    public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
+        config.antMatchers(
                 SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
                 SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
                 securityProperties.getBrowser().getLoginPage(),
@@ -33,5 +34,9 @@ public class MerryyouAuthorizeConfigProvider implements AuthorizeConfigProvider 
                 securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
                 securityProperties.getBrowser().getSignOutUrl()
         ).permitAll();
+        if (StringUtils.isNotBlank(securityProperties.getBrowser().getSignOutUrl())) {
+            config.antMatchers(securityProperties.getBrowser().getSignOutUrl()).permitAll();
+        }
+        return false;
     }
 }
