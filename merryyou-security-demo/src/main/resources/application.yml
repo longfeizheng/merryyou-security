@@ -21,10 +21,10 @@ server:
 security:
   basic:
     enabled: true
-  oauth2:
-    client:
-      clientId: merryyou
-      clientSecret: merryyousecret
+#  oauth2:
+#    client:
+#      clientId: merryyou
+#      clientSecret: merryyousecret
 
 #自定义登录页面
 merryyou:
@@ -48,3 +48,8 @@ merryyou:
 #        app-id:
 #        app-secret:
 #      filterProcessesUrl: /qqLogin
+    oauth2:
+      clients[0]:
+        clientId: merryyou
+        clientSecret: merryyousecret
+        accessTokenValiditySeconds: 7200
