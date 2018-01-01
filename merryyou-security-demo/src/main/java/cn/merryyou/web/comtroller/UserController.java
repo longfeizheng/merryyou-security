@@ -2,13 +2,8 @@ package cn.merryyou.web.comtroller;
 
 import cn.merryyou.dto.User;
 import cn.merryyou.dto.UserQueryCondition;
-import cn.merryyou.security.authentication.app.social.AppSignUpUtils;
-import cn.merryyou.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -41,32 +36,32 @@ public class UserController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
-    @Autowired
-    private AppSignUpUtils appSignUpUtils;
-
-    @Autowired
-    private SecurityProperties securityProperties;
+//    @Autowired
+//    private AppSignUpUtils appSignUpUtils;
+//
+//    @Autowired
+//    private SecurityProperties securityProperties;
 
     @PostMapping("/regist")
     public void regist(User user, HttpServletRequest request) {
         //不管是注册用户还是绑定用户，都会拿到一个用户唯一标识
         log.info("注册页面");
         String userId = user.getUsername();
-//        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
-        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+        providerSignInUtils.doPostSignUp(userId,new ServletWebRequest(request));
+//        appSignUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
 
     }
 
     @GetMapping("/me")
     public Object getCurrentUser(Authentication authentication, HttpServletRequest request) throws UnsupportedEncodingException {
-        String header = request.getHeader("Authorization");
-        String token = StringUtils.substringAfter(header, "bearer ");
-
-        Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
-                .parseClaimsJws(token).getBody();
-
-        String company = (String) claims.get("company");
-        log.info("【UserController】 getCurrentUser company={}", company);
+//        String header = request.getHeader("Authorization");
+//        String token = StringUtils.substringAfter(header, "bearer ");
+//
+//        Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+//                .parseClaimsJws(token).getBody();
+//
+//        String company = (String) claims.get("company");
+//        log.info("【UserController】 getCurrentUser company={}", company);
 
         return authentication;
     }

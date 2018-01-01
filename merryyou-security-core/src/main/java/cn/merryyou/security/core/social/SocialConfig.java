@@ -36,7 +36,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
 
-    @Autowired
+    @Autowired(required = false)
     private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
     @Override
@@ -60,6 +60,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
     @Bean
     public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
-        return new ProviderSignInUtils(connectionFactoryLocator, getUsersConnectionRepository(connectionFactoryLocator));
+        return new ProviderSignInUtils(connectionFactoryLocator,
+                getUsersConnectionRepository(connectionFactoryLocator)) {
+        };
     }
 }

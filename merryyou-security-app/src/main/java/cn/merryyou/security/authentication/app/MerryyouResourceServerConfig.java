@@ -2,6 +2,7 @@ package cn.merryyou.security.authentication.app;
 
 import cn.merryyou.security.authentication.app.authnentication.openid.OpenIdAuthenticationSecurityConfig;
 import cn.merryyou.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import cn.merryyou.security.core.authorize.AuthorizeConfigManager;
 import cn.merryyou.security.core.properties.SecurityConstants;
 import cn.merryyou.security.core.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class MerryyouResourceServerConfig extends ResourceServerConfigurerAdapte
     @Autowired
     private SpringSocialConfigurer merryyouSocialSecurityConfig;
 
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -57,21 +61,7 @@ public class MerryyouResourceServerConfig extends ResourceServerConfigurerAdapte
                 .and()
                 .apply(openIdAuthenticationSecurityConfig)
                 .and()
-                .authorizeRequests()
-                .antMatchers(
-                        SecurityConstants.DEFAULT_UNAUTHENTICATION_URL,
-                        SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_MOBILE,
-                        securityProperties.getBrowser().getLoginPage(),
-                        SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                        securityProperties.getBrowser().getSignUpUrl(),
-                        securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
-                        securityProperties.getBrowser().getSignOutUrl(),
-                        "/user/regist",
-                        "/social/signUp"
-                ).permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
                 .csrf().disable();
+            authorizeConfigManager.config(http.authorizeRequests());
     }
 }

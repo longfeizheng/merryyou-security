@@ -12,6 +12,7 @@
         <module>merryyou-security-browser</module>
         <module>merryyou-security-app</module>
         <module>merryyou-security-demo</module>
+        <module>merryyou-security-authnorize</module>
     </modules>
     <packaging>pom</packaging>
 
