@@ -48,8 +48,8 @@ merryyou:
 #        app-id:
 #        app-secret:
 #      filterProcessesUrl: /qqLogin
-#    oauth2:
-#      clients[0]:
-#        clientId: merryyou
-#        clientSecret: merryyousecret
-#        accessTokenValiditySeconds: 7200
+    oauth2:
+      clients[0]:
+        clientId: merryyou
+        clientSecret: merryyousecret
+        accessTokenValiditySeconds: 7200
